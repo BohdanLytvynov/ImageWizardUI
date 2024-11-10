@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ImageWizardUI.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,17 @@ namespace ImageWizardUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel m_vm;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            m_vm = new MainWindowViewModel();
+
+            this.DataContext = m_vm;
+
+            m_vm.Dispatcher = this.Dispatcher;
         }
     }
 }
