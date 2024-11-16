@@ -8,16 +8,28 @@
         xmlns:system="clr-namespace:System;assembly=netstandard"
         mc:Ignorable="d"
         Title="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
-        Height="450" Width="800"
+        Height="450" Width="800" MaxHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Height}" 
+        MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}"
         
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel, IsDesignTimeCreatable=True}">
 
     <Window.Resources>
-        <system:Double x:Key="HeaderFontSize">20
+        <system:Double x:Key="HeaderFontSize">18
+        </system:Double>
+
+        <system:Double x:Key="LabelsFontSize">14
+        </system:Double>
+
+        <system:Double x:Key="ResizegridFontSize">12
         </system:Double>
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
         <TabControl>
             <TabItem FontSize="{StaticResource HeaderFontSize}" Header="Sprite Sheet Creator">
                 <Grid>
@@ -26,13 +38,27 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="417*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid x:Name="leftGrid">
+                    <Grid x:Name="leftGrid" ShowGridLines="False">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="21*"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="352*"/>
+                            <RowDefinition Height="31*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="132*"/>
                         </Grid.RowDefinitions>
-                        <Grid x:Name="OpenImg" Grid.Row="1">
+                        <TextBlock Text="Enter the path to Input Images:" FontSize="{StaticResource LabelsFontSize}" Margin="0,31,0,0" Grid.RowSpan="2"/>
+
+                        <Grid x:Name="InputImg" Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="20"/>
                                 <ColumnDefinition Width="126*"/>
@@ -40,8 +66,8 @@
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="23*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <TextBox Grid.Column="1">
+
+                            <TextBox Grid.Column="1" FontSize="{StaticResource ResizegridFontSize}">
                                 <TextBox.Text>
                                     <Binding Path="PathToImgs" 
                                                  UpdateSourceTrigger="PropertyChanged" 
@@ -53,16 +79,169 @@
                                 </TextBox.Text>
                             </TextBox>
 
-                            <Button Grid.Column="3" Content="Open" 
+                            <Button Grid.Column="3" Content="Open" FontSize="{StaticResource ResizegridFontSize}"
                                     Command="{Binding OnOpenButtonPressed}"/>
                         </Grid>
+
+                        <TextBlock Grid.Row="4" Text="Enter the path to Output Folder:" FontSize="{StaticResource LabelsFontSize}" Margin="0,13,0,0" Grid.RowSpan="2"/>
+
+                        <Grid x:Name="OutputFolder"
+                              Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="209*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="42*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="1" FontSize="{StaticResource ResizegridFontSize}">
+                                <TextBox.Text>
+                                    <Binding Path="PathToOutput" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <DataErrorValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Grid.Column="3" Content="Open" FontSize="{StaticResource ResizegridFontSize}"/>
+                        </Grid>
+                        <Grid x:Name="CanvasWidthHeight" Grid.Row="9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="23*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Text="Canvas Width:" FontSize="{StaticResource LabelsFontSize}"/>
+                            <TextBox Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}">
+                                <TextBox.Text>
+                                    <Binding Path="CanvasWidth" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <DataErrorValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+
+                            <TextBlock Grid.Column="5" Text="Canvas Height:" FontSize="{StaticResource LabelsFontSize}"/>
+                            <TextBox Grid.Column="7" FontSize="{StaticResource ResizegridFontSize}">
+                                <TextBox.Text>
+                                    <Binding Path="CanvasHeight" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <DataErrorValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="11">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Text="Output file name:" FontSize="{StaticResource LabelsFontSize}"/>
+                            <TextBox Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}">
+                                <TextBox.Text>
+                                    <Binding Path="OutputFileName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <DataErrorValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+
+                        <Grid x:Name="ResizeRequired" Grid.Row="13">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="220*"/>
+                                <ColumnDefinition Width="161*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox x:Name="Resize" 
+                                      Grid.Column="1" 
+                                      Content="Do you need resize?" 
+                                      VerticalAlignment="Center" 
+                                      VerticalContentAlignment="Center"
+                                      FontSize="{StaticResource LabelsFontSize}"
+                                      IsChecked="{Binding UseResize, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="14">
+                            <Grid x:Name="ResizingGrid" Grid.Row="12" Margin="0,10,0,10"
+                                  Visibility="{Binding ResizeGridVisibility, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="79*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="6*"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="7*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="New Img. Width:" FontSize="{StaticResource ResizegridFontSize}"/>
+                                <TextBox Grid.Row="1" Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}">
+                                </TextBox>
+
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="New Img. Height:" FontSize="{StaticResource ResizegridFontSize}"/>
+                                <TextBox Grid.Row="3" Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}">
+                                </TextBox>
+                            </Grid>
+
+                            <Grid Height="20" Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Content="Start Processing" FontSize="{StaticResource ResizegridFontSize}"/>
+                            </Grid>
+
+                        </StackPanel>
                     </Grid>
                     <GridSplitter Grid.Column="1" Style="{StaticResource GridSplitterVertical}"/>
                     <Grid x:Name="rigthGrid" Grid.Column="2">
-                        <ListView Margin="10" BorderThickness="2" BorderBrush="Black"/>
+                        <ListView Margin="10" 
+                                  BorderThickness="2" 
+                                  BorderBrush="Black"
+                                  ItemsSource="{Binding Files, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  SelectedIndex="{Binding SelectedFileIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  />
                     </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
+
+        <Rectangle Grid.Row="1" Fill="Black"/>
+
+        <Grid Grid.Row="2" x:Name="Footer">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="243*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="388*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1"/>
+            <ProgressBar Grid.Column="3" Margin="0,6" 
+                         Maximum="1" 
+                         Minimum="0" 
+                         Value="0"/>
+        </Grid>
+
     </Grid>
 </Window>
