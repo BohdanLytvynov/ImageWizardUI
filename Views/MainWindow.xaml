@@ -307,7 +307,7 @@
             <ProgressBar Grid.Column="3" Margin="0,6" 
                          Maximum="1" 
                          Minimum="0" 
-                         Value="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                         Value="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </Grid>
 
     </Grid>

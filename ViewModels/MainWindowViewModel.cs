@@ -381,23 +381,35 @@ namespace ImageWizardUI.ViewModels
 
             ProgressGridVisibility = Visibility.Visible;
 
-            m_imgWizard.CreateSpriteSheet(
-                CanvasSize, 
-                Offset, 
-                pathes, 
-                PathToOutput, 
-                OutputFileName, 
-                UseResize, 
-                newImgSize);
+            var t = Task.Run(() =>
+            {
+                m_imgWizard.CreateSpriteSheet(
+                    CanvasSize,
+                    Offset,
+                    pathes,
+                    PathToOutput,
+                    OutputFileName,
+                    UseResize,
+                    newImgSize);
+            });
 
-            ProgressGridVisibility = Visibility.Hidden;
+            t.ContinueWith(t => 
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    ProgressGridVisibility = Visibility.Hidden;
+
+                    CurrentValue = 0f;
+                });
+            });            
         }
 
         private void OnImgProcessed(int imgIndex)
-        { 
-            int total = Files.Count;
-
-            CurrentValue = imgIndex / total;
+        {
+            this.Dispatcher?.Invoke(() =>
+            {               
+                CurrentValue = (float)imgIndex / (float)Files.Count;
+            });            
         }
 
         private bool IntGreaterThenZero(string value)
