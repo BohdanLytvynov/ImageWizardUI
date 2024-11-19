@@ -14,6 +14,8 @@ namespace ImageWizardUI.ViewModels
     {
         #region Fields
 
+        private const string DEFAULT_OUTPUT_FILE_NAME = "SpriteSheet";
+
         private ImageWizard m_imgWizard;
 
         private string m_title;
@@ -388,7 +390,7 @@ namespace ImageWizardUI.ViewModels
                     Offset,
                     pathes,
                     PathToOutput,
-                    OutputFileName,
+                    string.IsNullOrEmpty(OutputFileName)? DEFAULT_OUTPUT_FILE_NAME : OutputFileName,
                     UseResize,
                     newImgSize);
             });
