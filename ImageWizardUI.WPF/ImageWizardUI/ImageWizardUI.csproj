@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aspose.Core\Aspose.Core.csproj" />
+    <ProjectReference Include="..\..\ImageWizard.Core\Aspose.Core\Aspose.Core.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\ViewModelBase\ViewModelBase.csproj" />
   </ItemGroup>
