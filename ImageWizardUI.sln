@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "ImageWizardUI.WPF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aspose.Core", "ImageWizard.Core\Aspose.Core\Aspose.Core.csproj", "{792A4B57-5B69-4390-BA11-FC01D03C5C00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageWizardUI.AvaloniaUI", "ImageWizardUI.AvaloniaUI", "{501EB782-A65E-40CF-9064-CD8373464E8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageWizardUI", "ImageWizardUI\ImageWizardUI.csproj", "{06931D78-005B-4F69-B652-F6F68FE70F04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{792A4B57-5B69-4390-BA11-FC01D03C5C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{792A4B57-5B69-4390-BA11-FC01D03C5C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{792A4B57-5B69-4390-BA11-FC01D03C5C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06931D78-005B-4F69-B652-F6F68FE70F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06931D78-005B-4F69-B652-F6F68FE70F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06931D78-005B-4F69-B652-F6F68FE70F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06931D78-005B-4F69-B652-F6F68FE70F04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 		{70FB7B0B-CDF0-44AD-8333-DE83DAA5A374} = {7677EAEC-91CA-49CF-A515-BA635CBFF827}
 		{5F324CFF-4FDA-4F0E-B7D2-33DF41E8DAA4} = {7677EAEC-91CA-49CF-A515-BA635CBFF827}
 		{792A4B57-5B69-4390-BA11-FC01D03C5C00} = {BA291C88-D6FF-401D-8858-1BB62AF83477}
+		{06931D78-005B-4F69-B652-F6F68FE70F04} = {501EB782-A65E-40CF-9064-CD8373464E8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F05AFC41-2C6D-47F4-BFC2-29BD827E1AFF}
