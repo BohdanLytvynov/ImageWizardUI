@@ -125,22 +125,15 @@ namespace Aspose.Core
                     Resize(imgSize.Width, imgSize.Height, img);
                 }
 
-                if (x <= CanvasSize.Width)
-                {
-                    g.DrawImage(img, new PointF(x, y));
-
-                    x += imgSize.Width + Offset.Width;
-                }
-
                 if (x >= CanvasSize.Width)
                 {
                     x = 0;
                     y += imgSize.Height + Offset.Height;
-
-                    g.DrawImage(img, new PointF(x, y));
-
-                    x += imgSize.Width + Offset.Width;
                 }
+
+                g.DrawImage(img, new PointF(x, y));
+
+                x += imgSize.Width + Offset.Width;
 
                 OnImageProcessed?.Invoke(i);
             }
