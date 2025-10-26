@@ -1,0 +1,217 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ImageWizardUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:system="using:System"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="ImageWizardUI.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ImageWizardUI"
+	    Height="600" Width="800"
+		MaxWidth="{Binding RelativeSource={RelativeSource Self} Path=Width}"
+		MaxHeight="{Binding RelativeSource={RelativeSource Self} Path=Height}"
+	    >
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Window.Resources>
+		<system:Double x:Key="HeaderFontSize">
+			18
+		</system:Double>
+
+		<system:Double x:Key="LabelsFontSize">
+			14
+		</system:Double>
+
+		<system:Double x:Key="ResizegridFontSize">
+			12
+		</system:Double>
+	</Window.Resources>
+
+	<Grid x:Name="mainGrid" ShowGridLines="False">
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="5"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+		<TabControl Grid.Row="0">
+			<TabItem Header="Sprite Sheet Creator"
+					 FontSize="{StaticResource HeaderFontSize}">
+				<Grid ShowGridLines="True"
+					  ColumnDefinitions="*,Auto,*">
+					
+					
+				<RelativePanel x:Name="leftGrid">   										
+                    <TextBlock x:Name="txtbl1" Text="Enter the path to Input Images:" 
+							   FontSize="{StaticResource LabelsFontSize}"
+					    RelativePanel.AlignLeftWithPanel="True"/>
+
+                        <Grid x:Name="InputImg" 
+							  ShowGridLines="False"
+							  RelativePanel.Below="txtbl1"
+							  Margin="0,5,0,0"
+							ColumnDefinitions="10,Auto,5,*">                           
+
+                            <TextBox Grid.Column="1" 
+									 FontSize="{StaticResource ResizegridFontSize}"									 
+								     >
+                               
+                            </TextBox>
+
+                            <Button Grid.Column="3" Content="Open" 
+									FontSize="{StaticResource ResizegridFontSize}"
+									HorizontalContentAlignment="Center"
+									HorizontalAlignment="Stretch"
+                                    />
+                        </Grid>
+
+                        <TextBlock x:Name="txtbl2"							   
+								   RelativePanel.Below="InputImg"
+								   Margin="0,5,0,0"
+							Text="Enter the path to Output Folder:" FontSize="{StaticResource LabelsFontSize}" />
+
+                        <Grid x:Name="OutputFolder" ShowGridLines="False"
+                              RelativePanel.Below="txtbl2"
+							  Margin="0,5,0,0"
+							ColumnDefinitions="10,Auto,5,*">                            
+                            <TextBox Grid.Column="1" FontSize="{StaticResource ResizegridFontSize}">
+                               
+                            </TextBox>
+                            <Button Grid.Column="3" Content="Open" FontSize="{StaticResource ResizegridFontSize}"
+                                    />
+                        </Grid>
+                        <Grid x:Name="CanvasWidthHeight"
+							  RelativePanel.Below="OutputFolder"
+							  ShowGridLines="False"
+							  Margin="0,5,0,0"
+							  ColumnDefinitions="0,60,4,Auto,10,40,4,Auto,*"
+							>                            
+                            <TextBlock Grid.Column="1" Text="Columns:" FontSize="{StaticResource LabelsFontSize}"/>
+                            <TextBox Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}"
+                                     >
+                               
+                            </TextBox>
+
+                            <TextBlock Grid.Column="5" Text="Rows:" FontSize="{StaticResource LabelsFontSize}"/>
+                            <TextBox Grid.Column="7" FontSize="{StaticResource ResizegridFontSize}"
+                                     >
+                               
+                            </TextBox>
+                        </Grid>
+
+                        <Grid x:Name="outFileName" RelativePanel.Below="CanvasWidthHeight"
+							  Margin="0,5,0,0" ShowGridLines="False"
+							ColumnDefinitions="0,120,Auto">							                            
+                            <TextBlock Grid.Column="1" Text="Output file name:" FontSize="{StaticResource LabelsFontSize}"/>
+                            <TextBox Grid.Column="3">
+                               
+                            </TextBox>
+                        </Grid>
+
+					    <StackPanel Orientation="Vertical"
+									RelativePanel.Below="outFileName"
+							        Margin="0,5,0,0">
+							<CheckBox x:Name="Resize" 
+                                      Grid.Column="1" 
+                                      Content="Do you need resize?" 
+                                      VerticalAlignment="Center" 
+                                      VerticalContentAlignment="Center"
+                                      FontSize="{StaticResource LabelsFontSize}"
+                                      />
+						
+					<RelativePanel x:Name="ResizingPanel" Margin="0,10,0,10"                                  
+                                  >                                
+                                <TextBlock x:Name="label_new_img_width" Text="New Img. Width:" 
+										   FontSize="{StaticResource ResizegridFontSize}"
+						                    RelativePanel.AlignLeftWithPanel="True"/>
+                                <TextBox x:Name="new_img_width" FontSize="{StaticResource ResizegridFontSize}"
+										 RelativePanel.RightOf="label_new_img_width">
+                                   
+                                </TextBox>
+
+                                <TextBlock x:Name="label_new_img_height"
+									Text="New Img. Height:" FontSize="{StaticResource ResizegridFontSize}"
+						            RelativePanel.AlignLeftWithPanel="True"
+						            RelativePanel.Below="label_new_img_width"
+						            Margin="0,30,0,0"/>
+                                <TextBox x:Name="new_img_height"
+										 Margin="0,10,0,0"
+										 RelativePanel.Below="new_img_width"
+										 RelativePanel.RightOf="label_new_img_height"
+									FontSize="{StaticResource ResizegridFontSize}">
+                                    
+                                </TextBox>
+                            </RelativePanel>	
+					
+					            <CheckBox x:Name="Offset" 
+                                        Margin="0,0,0,5"
+                                        Grid.Column="1" 
+                                        Content="Do you need offsets?" 
+                                        VerticalAlignment="Center" 
+                                        VerticalContentAlignment="Center"
+                                        FontSize="{StaticResource LabelsFontSize}"
+                                        />	
+					
+					 <Grid x:Name="OffsetsGrid" Grid.Row="12" Margin="0,10,0,10"
+                                        
+                                        >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="79*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="6*"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="7*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="Vertical offset:" FontSize="{StaticResource ResizegridFontSize}"/>
+                                <TextBox Grid.Row="1" Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}" >
+                                    
+                                </TextBox>
+
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Horizontal offset:" FontSize="{StaticResource ResizegridFontSize}"/>
+                                <TextBox Grid.Row="3" Grid.Column="3" FontSize="{StaticResource ResizegridFontSize}" >
+                                   
+                                </TextBox>
+                            </Grid>	
+					
+						</StackPanel>
+					    
+                        <!--
+
+                        <StackPanel Grid.Row="14">
+                                                                                   
+                            <Grid Height="20" Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Content="Start Processing" FontSize="{StaticResource ResizegridFontSize}"
+                                        />
+                            </Grid>
+
+                        </StackPanel>-->
+                    </RelativePanel>
+				<GridSplitter Grid.Column="1"
+							  Classes="vertical-gridsplitter"/>
+				
+				</Grid>
+
+			</TabItem>
+		</TabControl>
+		<Rectangle Grid.Row="1" Fill="Black"/>
+	</Grid>
+
+</Window>
